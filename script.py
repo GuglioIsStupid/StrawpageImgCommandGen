@@ -2,7 +2,7 @@ import PIL.Image as __I
 import json as __J, zlib as __Z, base64 as __B
 
 StrawPageURL = 'https://hawktooah.straw.page/'  # Edit this URL as needed
-ImagePath = r"C:\Users\popro\Downloads\Loss_comic.jpg"  # Edit this path as needed
+ImagePath = r"pathtoimage"  # Edit this path as needed
 
 if StrawPageURL.endswith("/"): StrawPageURL = StrawPageURL[:-1]
 
