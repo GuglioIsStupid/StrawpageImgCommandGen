@@ -38,7 +38,7 @@ def RemoveImage() -> None:
 def SelectImage() -> None:
     global Image, ImageTk, ImageLabel
     from tkinter import filedialog
-    ImagePath: str = filedialog.askopenfilename(filetypes=[("Image Files", "*.png *.jpg *.jpeg *.bmp *.tiff *.webp")], title="Select Image")
+    ImagePath: str = filedialog.askopenfilename(filetypes=[("Image Files", "*.png *.jpg *.gif *.jpeg *.bmp *.tiff *.webp")], title="Select Image")
     if ImagePath != "" and ImagePath != None:
         ImagePathLabel.configure(text=f"Selected Image: {ImagePath}")
         UploadButton.configure(state="normal")
@@ -46,6 +46,14 @@ def SelectImage() -> None:
         # load image with pillow and display with tk
         RemoveImage()
         Image = pillow.Image.open(ImagePath)
+        # image can only be a max of 400x400, so keep the aspect
+        # keep the aspect ratio
+        maxSize = max(Image.size)
+        # make it so the largest size is 400
+        if maxSize > 400:
+            ratio = 400 / maxSize
+            Image = Image.resize((int(Image.size[0] * ratio), int(Image.size[1] * ratio)))
+
         ImageTk = TK.CTkImage(light_image=Image, dark_image=Image,
                                   size=(400, 400))
 
